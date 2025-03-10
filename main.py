@@ -1,3 +1,4 @@
+import os
 from flask import Flask, request, jsonify
 from youtube_transcript_api import YouTubeTranscriptApi, TranscriptsDisabled
 from flask_cors import CORS
@@ -23,4 +24,5 @@ def get_transcript():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    port = int(os.environ.get("PORT", 5000))  # ใช้ PORT ที่ Railway กำหนด
+    app.run(host='0.0.0.0', port=port)
